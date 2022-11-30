@@ -1,0 +1,36 @@
+{
+  "menu": {
+    "dashboard": "Dashboard",
+    "search": "Search",
+    "manage": "Manage"
+  },
+  "components": {
+    "no-data": "No Data",
+    "load-status": {
+      "loadingError": "There was an error loading results",
+      "notVersions": "There aren't any results available yet"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "appbar-title": "Dashboard",
+      "title": "Dashboard"
+    },
+    "search": {
+      "appbar-title": "Docudex Search",
+      "title": "Docudex Search"
+    },
+    "manage": {
+      "appbar-title": "Manage",
+      "title": "Manage"
+    },
+    "403": {
+      "appbar-title": "Not authorized",
+      "content": "Your credentials are not the ones required to access to this page. If this is a problem, please contact your manager."
+    },
+    "404": {
+      "appbar-title": "Page not found",
+      "content": "Upss page not found!"
+    }
+  }
+}
