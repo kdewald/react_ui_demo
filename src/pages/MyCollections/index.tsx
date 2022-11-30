@@ -5,10 +5,11 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import { Basic as Layout } from '../../layouts'
 import { useTheme } from '@mui/system'
+import MyCollections from './components/MyCollections'
 
 const ManagePage = () => {
   const { formatMessage: i18n } = useIntl()
-  const i18nNs = 'pages.manage'
+  const i18nNs = 'pages.myCollections'
   const theme = useTheme()
   return (
     <Layout sectionTitle={i18n({ id: `${i18nNs}.appbar-title` })}>
@@ -22,7 +23,7 @@ const ManagePage = () => {
       >
         <Grid container spacing={0}>
           <Grid item xs={12}>
-            Hello
+            <MyCollections />
           </Grid>
         </Grid>
       </Container>

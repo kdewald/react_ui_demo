@@ -3,7 +3,7 @@ import LogoutPage from './Logout'
 import NotFoundPage from './NotFound'
 import DashboardPage from './Dashboard'
 import SearchPage from './Search'
-import ManagePage from './Manage'
+import MyCollectionsPage from './MyCollections'
 import Redirect from './Redirect'
 
 // Icons
@@ -40,13 +40,13 @@ const menu: TMenuItem[] = [
     Icon: SearchIcon,
   },
   {
-    key: 'manage',
-    i18nNamespace: 'menu.manage',
-    to: '/manage',
-    path: '/manage',
+    key: 'myCollections',
+    i18nNamespace: 'menu.myCollections',
+    to: '/myCollections',
+    path: '/myCollections',
     requiresAuth: true,
     menuSections: ['MainMenu'],
-    Component: ManagePage,
+    Component: MyCollectionsPage,
     Icon: ListIcon,
   },
   {
