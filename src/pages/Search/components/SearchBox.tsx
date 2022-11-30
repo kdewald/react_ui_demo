@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 type Props = {
-  onSearch: (prompt: string) => void
+  onSearch: (prompt: string, onFinish: () => void) => void
 }
 
 const SearchBox = ({ onSearch }: Props) => {
@@ -17,8 +17,9 @@ const SearchBox = ({ onSearch }: Props) => {
 
   const handleClick = useCallback(() => {
     setLoading(true)
-    onSearch(prompt)
-    setLoading(false)
+    onSearch(prompt, () => {
+      setLoading(false)
+    })
   }, [onSearch, prompt])
 
   return (

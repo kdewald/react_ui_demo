@@ -2,6 +2,8 @@ import React from 'react'
 import { Box, Divider, Link, List, ListItem, ListItemText, Typography } from '@mui/material'
 
 export type TSearchResult = {
+  id: string
+  collectionId: string
   title: string
   score: number
   description: string

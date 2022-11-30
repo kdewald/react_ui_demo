@@ -10,6 +10,8 @@ import { Box, Drawer } from '@mui/material'
 
 import InfoIcon from '@mui/icons-material/Info'
 import MyCollectionView from './MyCollectionView'
+import { api } from 'src/api/internalApi'
+import LoadingCentered from 'src/components/Loaders/LoadingCentered'
 
 export type TMyCollection = {
   id: string
@@ -21,30 +23,17 @@ export type TMyCollection = {
 }
 
 const MyCollections = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [myCollections, setMyCollections] = useState<TMyCollection[]>([])
   const [openMyCollection, setOpenMyCollection] = useState<TMyCollection | undefined>(undefined)
-  useEffect(
-    () =>
-      setMyCollections([
-        {
-          id: '1',
-          name: 'FDA Submission - Project Potato',
-          stats: {
-            count: 1432,
-            size: 3215000,
-          },
-        },
-        {
-          id: '2',
-          name: 'Supplier contracts',
-          stats: {
-            count: 86,
-            size: 515000,
-          },
-        },
-      ]),
-    [],
-  )
+  useEffect(() => {
+    api.collections
+      .get()
+      .then(response => {
+        setMyCollections(response.results)
+      })
+      .finally(() => setIsLoading(false))
+  }, [])
 
   const handleOpenMyCollection = useCallback((myCollection: TMyCollection) => {
     setOpenMyCollection(myCollection)
@@ -143,24 +132,28 @@ const MyCollections = () => {
         </Box>
       </Drawer>
       <Box sx={{ height: 'calc(100vh - 70px)', width: '100%' }}>
-        <DataGrid
-          rows={myCollections}
-          columns={columns}
-          pageSize={5}
-          components={{
-            Toolbar: GridToolbar,
-          }}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-          disableSelectionOnClick
-          initialState={{
-            columns: {
-              columnVisibilityModel: {
-                id: false,
+        {isLoading ? (
+          <LoadingCentered main="Loading collections..." />
+        ) : (
+          <DataGrid
+            rows={myCollections}
+            columns={columns}
+            pageSize={15}
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            disableSelectionOnClick
+            initialState={{
+              columns: {
+                columnVisibilityModel: {
+                  id: false,
+                },
               },
-            },
-          }}
-        />
+            }}
+          />
+        )}
       </Box>
     </>
   )

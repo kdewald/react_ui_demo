@@ -7,6 +7,7 @@ import { Basic as Layout } from '../../layouts'
 import { useTheme } from '@mui/system'
 import SearchBox from './components/SearchBox'
 import SearchResults, { TSearchResult } from './components/SearchResults'
+import { api } from 'src/api/internalApi'
 
 const SearchPage = () => {
   const { formatMessage: i18n } = useIntl()
@@ -14,45 +15,13 @@ const SearchPage = () => {
   const theme = useTheme()
 
   const [results, setResults] = useState<TSearchResult[]>([])
-  const handleSearch = useCallback((prompt: string) => {
-    console.log(prompt)
-    setResults([
-      {
-        title: 'Novak Djokovic',
-        score: 0.853,
-        description:
-          'Since the introduction of a new point scale for the ATP rankings from 2009, Djokovic holds the record of 16,950 ranking points, the most ATP points ever accumulated by any player.',
-        link: 'https://en.wikipedia.org/wiki/Novak_Djokovic',
-      },
-      {
-        title: 'Novak Djokovic',
-        score: 0.853,
-        description:
-          'Since the introduction of a new point scale for the ATP rankings from 2009, Djokovic holds the record of 16,950 ranking points, the most ATP points ever accumulated by any player.',
-        link: 'https://en.wikipedia.org/wiki/Novak_Djokovic',
-      },
-      {
-        title: 'Novak Djokovic',
-        score: 0.853,
-        description:
-          'Since the introduction of a new point scale for the ATP rankings from 2009, Djokovic holds the record of 16,950 ranking points, the most ATP points ever accumulated by any player.',
-        link: 'https://en.wikipedia.org/wiki/Novak_Djokovic',
-      },
-      {
-        title: 'Novak Djokovic',
-        score: 0.853,
-        description:
-          'Since the introduction of a new point scale for the ATP rankings from 2009, Djokovic holds the record of 16,950 ranking points, the most ATP points ever accumulated by any player.',
-        link: 'https://en.wikipedia.org/wiki/Novak_Djokovic',
-      },
-      {
-        title: 'Novak Djokovic',
-        score: 0.853,
-        description:
-          'Since the introduction of a new point scale for the ATP rankings from 2009, Djokovic holds the record of 16,950 ranking points, the most ATP points ever accumulated by any player.',
-        link: 'https://en.wikipedia.org/wiki/Novak_Djokovic',
-      },
-    ])
+  const handleSearch = useCallback((prompt: string, onFinish: () => void) => {
+    api.documents
+      .search(prompt)
+      .then(response => {
+        setResults(response.results)
+      })
+      .finally(onFinish)
   }, [])
 
   return (

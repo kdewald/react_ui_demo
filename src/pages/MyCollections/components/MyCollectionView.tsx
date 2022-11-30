@@ -122,7 +122,7 @@ const MyCollectionView = ({ myCollection }: Props) => {
         }}
       >
         <Typography component={'span'} variant="body2" sx={{ margin: '5px 7px' }}>
-          <strong>{myCollection.name}</strong>
+          Collection: <strong>{myCollection.name}</strong>
         </Typography>
         {/* <Typography component={'span'} variant="body2" sx={{ margin: '5px 7px' }}>
           |
